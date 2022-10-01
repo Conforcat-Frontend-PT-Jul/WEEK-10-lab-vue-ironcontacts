@@ -4,14 +4,22 @@
   import contacts from './contacts.json';
   import { reactive } from 'vue';
 
-  const fiveFirstContacts = reactive(contacts.slice(0,5));
+  const ironContacts = reactive(contacts.splice(0,5));
   const oscarTrophy = "https://assets.stickpng.com/images/580b585b2edbce24c47b2d48.png";
   const emmyTrophy = "https://assets.stickpng.com/images/5853c5a6ec0c270fc2f62dfd.png"
 
+  function addContact() {
+    const position = Math.floor(Math.random()*contacts.length);
+    const removeRandomContact = contacts.splice(position, 1);
+    const randomContact = removeRandomContact.pop();
+
+    ironContacts.push(randomContact);
+  };
 </script>
 
 <template>
   <h1>IronContacts</h1>
+  <button @click="addContact" type="button">Add Random Contact</button>
   <table>
     <thead>
       <tr>
@@ -23,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="contact in fiveFirstContacts" :key="contact.id">
+      <tr v-for="contact in ironContacts" :key="contact.id">
         <td> <img :src="contact.pictureUrl" /></td>
         <td> {{ contact.name }} </td>
         <td> {{ contact.popularity.toFixed(2) }} </td>
