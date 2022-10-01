@@ -1,6 +1,6 @@
 <script>
-import contacts from "./contacts.json";
 import { ref, computed } from "vue";
+import contacts from "./contacts.json";
 
 const contactsList = ref(contacts);
 const fiveContacts = computed(() => {
@@ -33,15 +33,19 @@ export default {
           <th>Picture</th>
           <th>Name</th>
           <th>Popularity</th>
+          <th>Won Oscar</th>
+          <th>Won Emmy</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="contact in fiveContacts" :key="contact.id">
+        <tr v-for="contact in contactsList" :key="contact.id">
           <td>
             <img :src="contact.pictureUrl" alt="contact" />
           </td>
           <td>{{ contact.name }}</td>
           <td>{{ contact.popularity.toFixed(2) }}</td>
+          <td>{{ contact.wonOscar ? "🏆" : "No" }}</td>
+          <td>{{ contact.wonEmmy ? "🏆" : "No" }}</td>
         </tr>
       </tbody>
     </table>
