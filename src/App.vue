@@ -5,6 +5,8 @@
   import { reactive } from 'vue';
 
   const fiveFirstContacts = reactive(contacts.slice(0,5));
+  const oscarTrophy = "https://assets.stickpng.com/images/580b585b2edbce24c47b2d48.png";
+  const emmyTrophy = "https://assets.stickpng.com/images/5853c5a6ec0c270fc2f62dfd.png"
 
 </script>
 
@@ -16,13 +18,19 @@
         <th>Picture</th>
         <th>Name</th>
         <th>Popularity</th>
+        <th>Won an Oscar</th>
+        <th>Won an Emmy</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="contact in fiveFirstContacts" :key="contact.id">
         <td> <img :src="contact.pictureUrl" /></td>
         <td> {{ contact.name }} </td>
-        <td> {{ contact.popularity}} </td>
+        <td> {{ contact.popularity.toFixed(2) }} </td>
+        <td v-if="contact.wonOscar"><img :src="oscarTrophy" class="premio"/></td>
+        <td v-else></td>
+        <td v-if="contact.wonEmmy"> <img :src="emmyTrophy" class="premio"/> </td>
+        <td v-else></td>
       </tr>
     </tbody>
   </table>
@@ -41,9 +49,14 @@
   table {
     margin: auto;
   }
-  
+
   img {
     width: 70px;
+    height: auto;
+  }
+
+  .premio {
+    width: 30px;
     height: auto;
   }
 </style>
