@@ -64,7 +64,7 @@ function sortByPopularity(type) {
 </script>
 
 <template>
-  <h2>IronContacts</h2>
+  <h1>IronContacts</h1>
   <div class="top-buttons">
     <button @click="addRandomContact">Add random contact</button>
     <span>
@@ -154,20 +154,21 @@ table {
 }
 th, td {
   padding: 10px 20px;
+  min-width: 150px;
 }
 .selected.sortable:after {
   content: '>';
   display: inline-block;
   width: 15px;
   height: 15px;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   color: #c2c2c2;
   text-align: center;
   line-height: 15px;
   margin-left: 5px;
 }
 .selected.sortable.revert:after {
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 img {
   width: 100px;
