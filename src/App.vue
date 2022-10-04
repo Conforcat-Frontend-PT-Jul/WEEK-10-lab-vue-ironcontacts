@@ -4,11 +4,17 @@ import HelloWorld from "./components/HelloWorld.vue";
 import contacts from "./contacts.json";
 import { ref } from "vue";
 
-const fiveContacts = ref(contacts.slice(0, 5));
+const showingContacts = ref(contacts.slice(0, 5));
+
+function addContact() {
+  const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+  showingContacts.value.unshift(randomContact);
+}
 </script>
 
 <template>
   <h1>IronContacts</h1>
+  <button @click="addContact" type="button">Add Random Contact</button>
   <table>
     <thead>
       <tr>
@@ -20,7 +26,7 @@ const fiveContacts = ref(contacts.slice(0, 5));
       </tr>
     </thead>
     <tbody>
-      <tr v-for="contact in fiveContacts" :key="contact.id">
+      <tr v-for="contact in showingContacts" :key="contact.id">
         <td>
           <img :src="contact.pictureUrl" alt="{{contact.id}}" />
         </td>
@@ -53,7 +59,10 @@ img {
 
 table {
   /* padding: 10px 37%; */
-  margin: auto;
+  /* margin: auto; */
+  margin: 20px;
+
+  width: -webkit-fill-available;
 }
 
 thead {
