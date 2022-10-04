@@ -40,15 +40,28 @@ const deleteContact = (el) => {
 </script>
 
 <template>
-  <div class="contact-card">
+  <div class="container">
     <h1>Iron Contacts</h1>
-    {{ randomContact }}
-    <div menu-btn>
-      <button class="btn" @click="addRandomContact">Add Random Contact</button>
-      <button class="btn" @click="sortByName">Sort by name</button>
-      <button class="btn" @click="sortByPopularity">Sort by popularuty</button>
+    <div class="d-flex justify-content-around">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        @click="addRandomContact"
+      >
+        Add Random Contact
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" @click="sortByName">
+        Sort by name
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        @click="sortByPopularity"
+      >
+        Sort by popularuty
+      </button>
     </div>
-    <table>
+    <table class="table">
       <tr>
         <th>Picture</th>
         <th>Name</th>
@@ -58,7 +71,7 @@ const deleteContact = (el) => {
       </tr>
       <tr v-for="contact in contactsList" :key="contact.id">
         <td>
-          <img class="contact-image" :src="contact.pictureUrl" alt="foto" />
+          <img style="width: 100px" :src="contact.pictureUrl" alt="foto" />
         </td>
         <td>{{ contact.name }}</td>
         <td>{{ contact.popularity.toFixed(2) }}</td>
@@ -66,7 +79,13 @@ const deleteContact = (el) => {
         <td v-else></td>
         <td v-if="contact.wonEmmy">🏆</td>
         <td v-else></td>
-        <button @click="deleteContact(contact.id)">Delete</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          @click="deleteContact(contact.id)"
+        >
+          Delete
+        </button>
       </tr>
     </table>
   </div>
@@ -83,20 +102,5 @@ const deleteContact = (el) => {
 
 h1 {
   text-align: center;
-}
-
-.contact-image {
-  width: 70px;
-}
-
-.contact-card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 80%;
-  margin: 3em auto;
-  padding: 3em;
-}
-table {
-  table-layout: auto;
-  width: 100%;
 }
 </style>
