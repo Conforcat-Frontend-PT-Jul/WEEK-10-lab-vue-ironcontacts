@@ -1,23 +1,18 @@
 <script setup>
 import allContacts from './contacts.json'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
-const contacts = ref([]);
-let i;
-
-for(i=0; i<5; i++) {
-  contacts.value.push(allContacts[i])
-}
+const contacts = ref(allContacts.splice(0,5));
+const remainingContacts = ref(allContacts.splice(5,5));
 
 function addRandomContact() {
-  const itemsLeft = allContacts.length - contacts.value.length;
-  const randomItem = Math.floor((Math.random() * itemsLeft) + contacts.value.length);
-  console.log(randomItem)
-  contacts.value.push(allContacts[randomItem]);
+  const randomItem = Math.floor(Math.random() * remainingContacts.value.length) ;
+  console.log(remainingContacts.value.length, randomItem)
+  contacts.value.push(remainingContacts.value[randomItem]);
+  remainingContacts.value.splice(randomItem,1)
 }
 
 function sortContacts(attr) {
-  console.log(contacts.value);
   if(attr === 'Popularity') {
     contacts.value.sort( (a,b) => b.popularity - a.popularity )
   } else if (attr === 'Name') {
@@ -27,7 +22,6 @@ function sortContacts(attr) {
           return a == b ? 0 : a > b ? 1 : -1; 
     })
   }
-  console.log(contacts.value);
 }
 
 </script>
@@ -47,8 +41,9 @@ function sortContacts(attr) {
       <th>Picture</th>
       <th>Name</th>
       <th>Popularity</th>
-      <th>Won and Oscar</th>
+      <th>Won an Oscar</th>
       <th>Won an Emmy</th>
+      <th>Actions</th>
     </tr>
     <tr v-for="contact in contacts" :key="contacts.name">
       <td>
@@ -60,7 +55,10 @@ function sortContacts(attr) {
         <img class="trophy" alt="trophy image" src="./assets/images/trophy.png">
       </td>
       <td v-if="contact.wonEmmy">
-        <img class="trophy" alt="trophy image" src="./assets/images/trophy.png">
+        <img class="trophy" alt="trophy image" src="./assets/images/emmy.png">
+      </td>
+      <td>
+        <button @click="removeContact">Delete</button>
       </td>
     </tr>
   </table>
