@@ -82,11 +82,6 @@ function deleteContact(id) {
 body {
   padding: 0px;
   margin: 0px;
-  height: -webkit-fill-available;
-  width: -webkit-fill-available;
-  position: fixed;
-  top: 0;
-  left: 0;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -101,6 +96,8 @@ body {
   background-size: cover;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
+  margin: 0;
+  padding-bottom: 75px;
 }
 
 img {
@@ -179,5 +176,9 @@ button:hover {
 .star-enter-from,
 .star-leave-to {
   opacity: 0;
+}
+h1 {
+  margin-top: 0;
+  padding: 35px;
 }
 </style>
