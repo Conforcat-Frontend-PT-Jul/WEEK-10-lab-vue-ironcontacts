@@ -44,6 +44,11 @@ const sortByPopularity = () => {
   });
 };
 
+const deleteContact = (index) => {
+  contactsList.value.push(fiveContacts.value[index]);
+  return fiveContacts.value.splice(index, 1);
+};
+
 export default {
   name: "TheIronContacts",
   setup() {
@@ -53,6 +58,7 @@ export default {
       addRandomContact,
       sortByName,
       sortByPopularity,
+      deleteContact,
       byName,
       byPopularity,
     };
@@ -88,6 +94,9 @@ export default {
           <td>{{ contact.popularity.toFixed(2) }}</td>
           <td>{{ contact.wonOscar ? "🏆" : "No" }}</td>
           <td>{{ contact.wonEmmy ? "🏆" : "No" }}</td>
+          <td>
+            <button @click="deleteContact(index)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
