@@ -111,8 +111,8 @@ img {
 }
 
 img:hover {
-  transform: scale(1.3);
-  translate: 500px;
+  transform: scale(1.9);
+  translate: 600px;
   rotate: 360deg;
 }
 
