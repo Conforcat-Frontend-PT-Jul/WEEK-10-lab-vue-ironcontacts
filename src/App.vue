@@ -26,15 +26,30 @@ function sortByName() {
   fiveContacts.value.sort((a, b) => a.name.localeCompare(b.name));
   return fiveContacts;
 }
+
+function deleteContact(id) {
+  console.log(id);
+
+  fiveContacts.value.forEach((contact, index) => {
+    if (contact.id === id) {
+      fiveContacts.value.splice(index, 1);
+      return fiveContacts;
+    }
+  });
+}
 </script>
 
 <template>
   <div id="app">
     <div id="header">
       <p>Iron Contacts</p>
-      <button @click="addRandomContact()">Add Random Contact</button>
-      <button @click="sortByPopularity()">Sort by popularity</button>
-      <button @click="sortByName()">Sort by name</button>
+      <button class="btn-m" @click="addRandomContact()">
+        Add Random Contact
+      </button>
+      <button class="btn-m" @click="sortByPopularity()">
+        Sort by popularity
+      </button>
+      <button class="btn-m" @click="sortByName()">Sort by name</button>
     </div>
     <table>
       <tr>
@@ -43,6 +58,7 @@ function sortByName() {
         <th>Popularity</th>
         <th>Won an Oscar</th>
         <th>Won an Emmy</th>
+        <th>Actions</th>
       </tr>
       <tr v-for="contact in fiveContacts">
         <td><img :src="contact.pictureUrl" /></td>
@@ -52,6 +68,7 @@ function sortByName() {
         <td v-else="contact.wonOscar"></td>
         <td v-if="contact.wonEmmy">🏆</td>
         <td v-else="contact.wonEmmy"></td>
+        <td><button @click="deleteContact(contact.id)">Delete</button></td>
       </tr>
     </table>
   </div>
@@ -77,5 +94,9 @@ table {
 
 #header {
   text-align: center;
+}
+
+.btn-m {
+  margin-left: 10px;
 }
 </style>
