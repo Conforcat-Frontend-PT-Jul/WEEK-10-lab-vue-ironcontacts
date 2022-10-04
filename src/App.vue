@@ -79,13 +79,28 @@ function deleteContact(id) {
 </template>
 
 <style>
+body {
+  padding: 0px;
+  margin: 0px;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
+  color: antiquewhite;
   margin-top: 60px;
+  background-image: url("./../public/background.jpg");
+
+  background-size: cover;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
 }
 
 img {
@@ -117,6 +132,11 @@ thead {
 
 .trophy {
   font-size: 30px;
+}
+
+td {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 button {
