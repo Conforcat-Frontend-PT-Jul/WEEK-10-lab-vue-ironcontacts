@@ -32,8 +32,12 @@ for(i=0; i<5; i++) {
       </td>
       <td> {{ contact.name }} </td>
       <td> {{ contact.popularity }} </td>
-      <td> {{ contact.name }} </td>
-      <td> {{ contact.popularity }} </td>
+      <td v-if="contact.wonOscar">
+        <img class="trophy" alt="trophy image" src="./assets/images/trophy.png">
+      </td>
+      <td v-if="contact.wonEmmy">
+        <img class="trophy" alt="trophy image" src="./assets/images/trophy.png">
+      </td>
     </tr>
   </table>
 </template>
@@ -50,5 +54,9 @@ for(i=0; i<5; i++) {
 
 td img {
  width: 100px ;
+}
+
+.trophy {
+  width: 25px;
 }
 </style>
