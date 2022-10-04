@@ -55,8 +55,11 @@ function deleteContact(id) {
     </thead>
     <tbody>
       <tr v-for="contact in showingContacts" :key="contact.id">
+        <!-- <TransitionGroup name="list" tag="td"> -->
         <td>
-          <img :src="contact.pictureUrl" alt="{{contact.id}}" />
+          <Transition>
+            <img :src="contact.pictureUrl" alt="{{contact.id}}" class="star" />
+          </Transition>
         </td>
         <td>{{ contact.name }}</td>
         <td>{{ contact.popularity.toFixed(2) }}</td>
@@ -69,6 +72,7 @@ function deleteContact(id) {
             Delete
           </button>
         </td>
+        <!-- </TransitionGroup> -->
       </tr>
     </tbody>
   </table>
@@ -86,6 +90,18 @@ function deleteContact(id) {
 
 img {
   width: 75px;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.4s;
+}
+
+img:hover {
+  transform: scale(1.3);
+  translate: 500px;
+  rotate: 360deg;
+  /* margin-left: 800px; */
+  /* position: absolute;
+  right: 50%; */
 }
 
 table {
@@ -101,5 +117,47 @@ thead {
 
 .trophy {
   font-size: 30px;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: gold;
+  background-image: linear-gradient(gold, lightgoldenrodyellow);
+  text-decoration: none;
+  color: #2c3e50;
+  border-style: none;
+  border-radius: 10px;
+  margin: 3px;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+button:hover {
+  background-color: lightgoldenrodyellow;
+  background-image: linear-gradient(lightgoldenrodyellow, gold);
+  cursor: pointer;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.star-enter-active,
+.star-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.star-enter-from,
+.star-leave-to {
+  opacity: 0;
 }
 </style>
