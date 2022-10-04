@@ -1,12 +1,41 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import allContacts from './contacts.json'
+import { onMounted, ref } from 'vue';
+
+const contacts = ref([]);
+let i;
+
+for(i=0; i<5; i++) {
+  contacts.value.push(allContacts[i])
+}
+
+//console.log(contacts.value[0])
+
+
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <header>
+    <h1>IronContacts</h1>
+  </header>
+  <table>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Popularity</th>
+      <th>Won and Oscar</th>
+      <th>Won an Emmy</th>
+    </tr>
+    <tr v-for="contact in contacts" :key="contacts.name">
+      <td>
+        <img alt="Celebrity picture" :src=contact.pictureUrl>
+      </td>
+      <td> {{ contact.name }} </td>
+      <td> {{ contact.popularity }} </td>
+      <td> {{ contact.name }} </td>
+      <td> {{ contact.popularity }} </td>
+    </tr>
+  </table>
 </template>
 
 <style>
@@ -17,5 +46,9 @@ import HelloWorld from './components/HelloWorld.vue'
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+td img {
+ width: 100px ;
 }
 </style>
