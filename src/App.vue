@@ -1,6 +1,4 @@
 <script setup>
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from "./components/HelloWorld.vue";
 import contacts from "./contacts.json";
 import { ref } from "vue";
 
@@ -27,6 +25,14 @@ function sortContacts() {
 function sortPopularity() {
   showingContacts.value.sort((a, b) => b.popularity - a.popularity);
 }
+
+function deleteContact(id) {
+  showingContacts.value.forEach((el, index) => {
+    if (el.id === id) {
+      showingContacts.value.splice(index, 1);
+    }
+  });
+}
 </script>
 
 <template>
@@ -44,6 +50,7 @@ function sortPopularity() {
         <th>Popularity</th>
         <th>Won Oscar</th>
         <th>Won Emmy</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -54,14 +61,17 @@ function sortPopularity() {
         <td>{{ contact.name }}</td>
         <td>{{ contact.popularity.toFixed(2) }}</td>
         <td v-if="contact.wonOscar" class="trophy">🏆</td>
-        <td v-if="contact.wonEmmy" class="trophy">🏆</td>
         <td v-else></td>
+        <td v-if="contact.wonEmmy" class="trophy">🌟</td>
+        <td v-else></td>
+        <td>
+          <button @click="deleteContact(contact.id)" type="button">
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-
-  <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
 </template>
 
 <style>
@@ -79,8 +89,6 @@ img {
 }
 
 table {
-  /* padding: 10px 37%; */
-  /* margin: auto; */
   margin: 20px;
 
   width: -webkit-fill-available;
