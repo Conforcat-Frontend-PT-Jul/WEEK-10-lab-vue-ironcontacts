@@ -1,49 +1,53 @@
 <script setup>
 import contacts from "./contacts.json";
-import { ref, reactive, computed } from "vue";
-const firstFiveContacts = reactive(contacts.slice(0, 5)); 
-const contactsList = firstFiveContacts
-const randomContact = reactive(contacts[Math.floor(Math.random() * contacts.length)]);
+import { ref, reactive } from "vue";
+const firstFiveContacts = reactive(contacts.slice(0, 5));
+const contactsList = firstFiveContacts;
 const addRandomContact = () => {
-  contactsList.push(randomContact)
-}
+  const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+  contactsList.push(randomContact);
+};
 const sortByName = () => {
-  contactsList.sort(function(a, b){
-    if(a.name < b.name) { return -1; }
-    if(a.name > b.name) { return 1; }
+  contactsList.sort(function (a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
     return 0;
-})
-}
+  });
+};
 
 const sortByPopularity = () => {
-  contactsList.sort(function(a, b){
-    if(a.popularity < b.popularity) { return 1; }
-    if(a.popularity > b.popularity) { return -1; }
+  contactsList.sort(function (a, b) {
+    if (a.popularity < b.popularity) {
+      return 1;
+    }
+    if (a.popularity > b.popularity) {
+      return -1;
+    }
     return 0;
-})
-}
+  });
+};
 
 const deleteContact = (el) => {
-  const index = contactsList.findIndex(contact => {
+  const index = contactsList.findIndex((contact) => {
     return contact.id === el;
   });
   contactsList.splice(index, 1);
-}
-
-
-
+};
 </script>
 
 <template>
-
   <div class="contact-card">
     <h1>Iron Contacts</h1>
-    {{randomContact}}
+    {{ randomContact }}
     <div menu-btn>
-    <button class="btn" @click="addRandomContact">Add Random Contact</button>
-    <button class="btn" @click="sortByName">Sort by name</button>
-    <button class="btn" @click="sortByPopularity">Sort by popularuty</button>
-  </div>
+      <button class="btn" @click="addRandomContact">Add Random Contact</button>
+      <button class="btn" @click="sortByName">Sort by name</button>
+      <button class="btn" @click="sortByPopularity">Sort by popularuty</button>
+    </div>
     <table>
       <tr>
         <th>Picture</th>
@@ -65,9 +69,7 @@ const deleteContact = (el) => {
         <button @click="deleteContact(contact.id)">Delete</button>
       </tr>
     </table>
- 
   </div>
-
 </template>
 
 <style>
@@ -78,7 +80,6 @@ const deleteContact = (el) => {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 
 h1 {
   text-align: center;
@@ -98,5 +99,4 @@ table {
   table-layout: auto;
   width: 100%;
 }
-
 </style>
