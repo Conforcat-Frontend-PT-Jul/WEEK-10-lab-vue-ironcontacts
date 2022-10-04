@@ -23,9 +23,14 @@ const sortByPopularity = () => {
 })
 }
 
-const deleteContact = () => {
-  contactsList.splice(contactsList.id, 1);
+const deleteContact = (el) => {
+  const index = contactsList.findIndex(contact => {
+    return contact.id === el;
+  });
+  contactsList.splice(index, 1);
 }
+
+
 
 </script>
 
