@@ -9,8 +9,12 @@ for(i=0; i<5; i++) {
   contacts.value.push(allContacts[i])
 }
 
-//console.log(contacts.value[0])
-
+function addRandomContact() {
+  const itemsLeft = allContacts.length - contacts.value.length;
+  const randomItem = Math.floor((Math.random() * itemsLeft) + contacts.value.length);
+  console.log(randomItem)
+  contacts.value.push(allContacts[randomItem]);
+}
 
 </script>
 
@@ -18,6 +22,8 @@ for(i=0; i<5; i++) {
   <header>
     <h1>IronContacts</h1>
   </header>
+  <button @click="addRandomContact">Add random contact</button>
+  <br>
   <table>
     <tr>
       <th>Picture</th>
