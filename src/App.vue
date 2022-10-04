@@ -5,8 +5,6 @@
   import { reactive } from 'vue';
 
   const ironContacts = reactive(contacts.splice(0,5));
-  const oscarTrophy = "https://assets.stickpng.com/images/580b585b2edbce24c47b2d48.png";
-  const emmyTrophy = "https://assets.stickpng.com/images/5853c5a6ec0c270fc2f62dfd.png";
 
   function addContact() {
     const position = Math.floor(Math.random()*contacts.length);
@@ -70,13 +68,13 @@
         <td> {{ contact.name }} </td>
         <td> {{ contact.popularity.toFixed(2) }} </td>
         <td>
-          <span v-if="contact.wonOscar">
-            <img :src="oscarTrophy" class="premio"/>
+          <span v-show="contact.wonOscar">
+            <img src="./img/oscar.png" class="premio"/>
           </span>
         </td>
         <td> 
-          <span v-if="contact.wonEmmy">
-            <img :src="emmyTrophy" class="premio"/>
+          <span v-show="contact.wonEmmy">
+            <img src="./img/emmy.png" class="premio"/>
           </span>
         </td>
         <td>
@@ -115,7 +113,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 35%;
+    max-width: 50%;
     margin: 1rem auto;
   }
   button {
@@ -125,24 +123,25 @@
     cursor: pointer;
     font-weight: bold;
     color: white;
+    transition: background-color 1s;
   }
   #addButton {
-    background-color: rgb(43, 197, 43);
+    background-color: #57cc99;
   }
   #addButton:hover {
-    background-color: rgba(28, 156, 28, 0.774);
+    background-color: #80ed99;
   }
   .sortedButtons {
-    background-color: #4589ceb7;
+    background-color: #0077b6;
   }
   .sortedButtons:hover {
-    background-color: #2b85dfcb;
+    background-color: #00b4d8;
   }
   .removeButtons {
-    background-color: rgba(236, 87, 87, 0.945);
+    background-color: #f08080;
   }
   .removeButtons:hover {
-    background-color: rgba(221, 118, 118, 0.945);
+    background-color: #f4978e;
   }
   thead {
     font-size: 1.2rem;
