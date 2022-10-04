@@ -1,12 +1,11 @@
 <script>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import contacts from "./contacts.json";
 
 const contactsList = ref(contacts);
-
-const fiveContacts = computed(() => {
-  return contactsList.value.slice(0, 5);
-});
+const fiveContacts = ref(contactsList.value.slice(0, 5));
+const byName = ref(false);
+const byPopularity = ref(false);
 
 const addRandomContact = () => {
   const randomIndex = Math.floor(Math.random() * contactsList.value.length);
@@ -23,6 +22,28 @@ const addRandomContact = () => {
   return fiveContacts.value;
 };
 
+const sortByName = () => {
+  byName.value = true;
+  byPopularity.value = false;
+  return fiveContacts.value.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
+const sortByPopularity = () => {
+  byName.value = false;
+  byPopularity.value = true;
+  return fiveContacts.value.sort((a, b) => {
+    return b.popularity - a.popularity;
+  });
+};
+
 export default {
   name: "TheIronContacts",
   setup() {
@@ -30,6 +51,10 @@ export default {
       contactsList,
       fiveContacts,
       addRandomContact,
+      sortByName,
+      sortByPopularity,
+      byName,
+      byPopularity,
     };
   },
 };
@@ -39,8 +64,8 @@ export default {
   <h1>IronContacts</h1>
   <div>
     <button @click="addRandomContact">Add Random Contact</button>
-    <button>Sort by Name</button>
-    <button>Sort by Popularity</button>
+    <button @click="sortByName">Sort by Name</button>
+    <button @click="sortByPopularity">Sort by Popularity</button>
   </div>
 
   <div class="table">
