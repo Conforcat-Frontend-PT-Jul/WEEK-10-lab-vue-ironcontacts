@@ -37,11 +37,11 @@ function deleteContact(id) {
 
 <template>
   <h1>IronContacts</h1>
-  <button @click="addContact" type="button">Add Random Contact</button>
-  <button @click="sortContacts" type="button">Sort Contacts by Name</button>
-  <button @click="sortPopularity" type="button">
-    Sort Contacts by Popularity
-  </button>
+  <container class="buttons">
+    <button @click="addContact" type="button">Add Random Contact</button>
+    <button @click="sortContacts" type="button">Sort by name</button>
+    <button @click="sortPopularity" type="button">Sort by popularity</button>
+  </container>
   <table>
     <thead>
       <tr>
@@ -55,24 +55,22 @@ function deleteContact(id) {
     </thead>
     <tbody>
       <tr v-for="contact in showingContacts" :key="contact.id">
-        <!-- <TransitionGroup name="list" tag="td"> -->
-        <td>
-          <Transition>
+        <TransitionGroup name="list">
+          <td>
             <img :src="contact.pictureUrl" alt="{{contact.id}}" class="star" />
-          </Transition>
-        </td>
-        <td>{{ contact.name }}</td>
-        <td>{{ contact.popularity.toFixed(2) }}</td>
-        <td v-if="contact.wonOscar" class="trophy">🏆</td>
-        <td v-else></td>
-        <td v-if="contact.wonEmmy" class="trophy">🌟</td>
-        <td v-else></td>
-        <td>
-          <button @click="deleteContact(contact.id)" type="button">
-            Delete
-          </button>
-        </td>
-        <!-- </TransitionGroup> -->
+          </td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.popularity.toFixed(2) }}</td>
+          <td v-if="contact.wonOscar" class="trophy">🏆</td>
+          <td v-else></td>
+          <td v-if="contact.wonEmmy" class="trophy">🌟</td>
+          <td v-else></td>
+          <td>
+            <button @click="deleteContact(contact.id)" type="button">
+              Delete
+            </button>
+          </td>
+        </TransitionGroup>
       </tr>
     </tbody>
   </table>
@@ -88,7 +86,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50; */
   color: antiquewhite;
   margin-top: 60px;
   background-image: url("./../public/background.jpg");
@@ -98,6 +95,12 @@ body {
   width: -webkit-fill-available;
   margin: 0;
   padding-bottom: 75px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
 img {
@@ -111,9 +114,6 @@ img:hover {
   transform: scale(1.3);
   translate: 500px;
   rotate: 360deg;
-  /* margin-left: 800px; */
-  /* position: absolute;
-  right: 50%; */
 }
 
 table {
@@ -157,26 +157,22 @@ button:hover {
   cursor: pointer;
 }
 
+.list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 1.5s ease;
+  transition: all 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(30px);
 }
 
-.star-enter-active,
-.star-leave-active {
-  transition: opacity 0.5s ease;
+.list-leave-active {
+  position: absolute;
 }
 
-.star-enter-from,
-.star-leave-to {
-  opacity: 0;
-}
 h1 {
   margin-top: 0;
   padding: 35px;
