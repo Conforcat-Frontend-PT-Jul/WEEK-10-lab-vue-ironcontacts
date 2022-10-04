@@ -3,9 +3,27 @@ import { ref, computed } from "vue";
 import contacts from "./contacts.json";
 
 const contactsList = ref(contacts);
+
 const fiveContacts = computed(() => {
   return contactsList.value.slice(0, 5);
 });
+
+const addRandomContact = () => {
+  const randomIndex = Math.floor(Math.random() * contactsList.value.length);
+  const randomContact = contactsList.value[randomIndex];
+
+  if (fiveContacts.value.includes(randomContact)) {
+    addRandomContact();
+  } else {
+    fiveContacts.value.push(randomContact);
+  }
+
+  fiveContacts.value.push(contactsList.value[randomIndex]);
+
+  contactsList.value.splice(randomIndex, 1);
+
+  return fiveContacts.value;
+};
 
 export default {
   name: "TheIronContacts",
@@ -13,6 +31,7 @@ export default {
     return {
       contactsList,
       fiveContacts,
+      addRandomContact,
     };
   },
 };
@@ -21,7 +40,7 @@ export default {
 <template>
   <h1>IronContacts</h1>
   <div>
-    <button>Add Random Contact</button>
+    <button @click="addRandomContact">Add Random Contact</button>
     <button>Sort by Name</button>
     <button>Sort by Popularity</button>
   </div>
@@ -38,7 +57,7 @@ export default {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="contact in contactsList" :key="contact.id">
+        <tr v-for="contact in fiveContacts" :key="contact.id">
           <td>
             <img :src="contact.pictureUrl" alt="contact" />
           </td>
