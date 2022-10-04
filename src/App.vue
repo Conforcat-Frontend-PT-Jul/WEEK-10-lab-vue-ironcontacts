@@ -1,15 +1,44 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import contacts from "./contacts.json";
-import { ref } from "vue";
-const firstFiveContacts = contacts.slice(0, 6);
-const randomContact = ref("");
+import { ref, reactive, computed } from "vue";
+const firstFiveContacts = reactive(contacts.slice(0, 5)); 
+const contactsList = firstFiveContacts
+const randomContact = reactive(contacts[Math.floor(Math.random() * contacts.length)]);
+const addRandomContact = () => {
+  contactsList.push(randomContact)
+}
+const sortByName = () => {
+  contactsList.sort(function(a, b){
+    if(a.name < b.name) { return -1; }
+    if(a.name > b.name) { return 1; }
+    return 0;
+})
+}
+
+const sortByPopularity = () => {
+  contactsList.sort(function(a, b){
+    if(a.popularity < b.popularity) { return 1; }
+    if(a.popularity > b.popularity) { return -1; }
+    return 0;
+})
+}
+
+const deleteContact = () => {
+  contactsList.splice(contactsList.id, 1);
+}
+
 </script>
 
 <template>
+
   <div class="contact-card">
     <h1>Iron Contacts</h1>
+    {{randomContact}}
+    <div menu-btn>
+    <button class="btn" @click="addRandomContact">Add Random Contact</button>
+    <button class="btn" @click="sortByName">Sort by name</button>
+    <button class="btn" @click="sortByPopularity">Sort by popularuty</button>
+  </div>
     <table>
       <tr>
         <th>Picture</th>
@@ -18,7 +47,7 @@ const randomContact = ref("");
         <th>Won an Oscar</th>
         <th>Won an Emmy</th>
       </tr>
-      <tr v-for="contact in firstFiveContacts" :key="contact.id">
+      <tr v-for="contact in contactsList" :key="contact.id">
         <td>
           <img class="contact-image" :src="contact.pictureUrl" alt="foto" />
         </td>
@@ -28,10 +57,12 @@ const randomContact = ref("");
         <td v-else></td>
         <td v-if="contact.wonEmmy">🏆</td>
         <td v-else></td>
+        <button @click="deleteContact(contact.id)">Delete</button>
       </tr>
     </table>
-    <button>Add Random Contact</button>
+ 
   </div>
+
 </template>
 
 <style>
@@ -43,14 +74,24 @@ const randomContact = ref("");
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+h1 {
+  text-align: center;
+}
+
 .contact-image {
-  width: 80px;
+  width: 70px;
 }
 
 .contact-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 80%;
   margin: 3em auto;
   padding: 3em;
 }
+table {
+  table-layout: auto;
+  width: 100%;
+}
+
 </style>
