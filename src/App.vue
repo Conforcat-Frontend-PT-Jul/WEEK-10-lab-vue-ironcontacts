@@ -18,8 +18,6 @@ const addRandomContact = () => {
     fiveContacts.value.push(randomContact);
   }
 
-  fiveContacts.value.push(contactsList.value[randomIndex]);
-
   contactsList.value.splice(randomIndex, 1);
 
   return fiveContacts.value;
