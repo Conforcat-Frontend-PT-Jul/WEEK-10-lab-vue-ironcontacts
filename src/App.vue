@@ -15,6 +15,8 @@ const fiveContacts = ref(contacts.slice(0, 5));
         <th>Picture</th>
         <th>Name</th>
         <th>Popularity</th>
+        <th>Won Oscar</th>
+        <th>Won Emmy</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +26,9 @@ const fiveContacts = ref(contacts.slice(0, 5));
         </td>
         <td>{{ contact.name }}</td>
         <td>{{ contact.popularity.toFixed(2) }}</td>
+        <td v-if="contact.wonOscar" class="trophy">🏆</td>
+        <td v-if="contact.wonEmmy" class="trophy">🏆</td>
+        <td v-else></td>
       </tr>
     </tbody>
   </table>
@@ -49,5 +54,14 @@ img {
 table {
   /* padding: 10px 37%; */
   margin: auto;
+}
+
+thead {
+  font-weight: 800;
+  font-size: x-large;
+}
+
+.trophy {
+  font-size: 30px;
 }
 </style>
