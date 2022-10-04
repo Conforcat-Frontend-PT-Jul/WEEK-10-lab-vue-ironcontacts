@@ -10,11 +10,32 @@ function addContact() {
   const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
   showingContacts.value.unshift(randomContact);
 }
+
+function sortContacts() {
+  // showingContacts.value.sort((a, b) => a.name.localeCompare(b.name));
+  showingContacts.value.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    } else if (a.name > b.name) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+function sortPopularity() {
+  showingContacts.value.sort((a, b) => b.popularity - a.popularity);
+}
 </script>
 
 <template>
   <h1>IronContacts</h1>
   <button @click="addContact" type="button">Add Random Contact</button>
+  <button @click="sortContacts" type="button">Sort Contacts by Name</button>
+  <button @click="sortPopularity" type="button">
+    Sort Contacts by Popularity
+  </button>
   <table>
     <thead>
       <tr>
