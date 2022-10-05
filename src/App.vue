@@ -125,9 +125,11 @@ img {
 }
 
 img:hover {
-  transform: scale(1.9);
-  translate: 600px;
+  transform: scale(3.5);
+  translate: 55vw;
+  position: relative;
   rotate: 360deg;
+  z-index: 999;
 }
 
 table {
@@ -165,10 +167,16 @@ button {
   font-family: sans-serif;
   font-weight: 100;
 }
+
 button:hover {
   background-color: lightgoldenrodyellow;
   background-image: linear-gradient(lightgoldenrodyellow, gold);
   cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0 3px rgb(102, 102, 102);
+  transform: translateY(2px);
 }
 
 .list-move,
