@@ -6,7 +6,11 @@ const showingContacts = ref(contacts.slice(0, 5));
 
 function addContact() {
   const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
-  showingContacts.value.unshift(randomContact);
+  if (!showingContacts.value.includes(randomContact)) {
+    return showingContacts.value.unshift(randomContact);
+  } else {
+    return addContact();
+  }
 }
 
 function sortContacts() {
