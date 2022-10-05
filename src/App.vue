@@ -2,9 +2,12 @@
 import contacts from "./contacts.json";
 import { ref, reactive } from "vue";
 const firstFiveContacts = reactive(contacts.slice(0, 5));
+const otherContacts = reactive(contacts.slice(5));
 const contactsList = firstFiveContacts;
+
+
 const addRandomContact = () => {
-  const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+  const randomContact = otherContacts[Math.floor(Math.random() * otherContacts.length)];
   contactsList.push(randomContact);
 };
 const sortByName = () => {
@@ -41,6 +44,7 @@ const deleteContact = (el) => {
 
 <template>
   <div class="container shadow-sm p-3 mb-5 bg-body rounded">
+    
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <span class="navbar-brand"><h2> Iron Contacts</h2></span>
