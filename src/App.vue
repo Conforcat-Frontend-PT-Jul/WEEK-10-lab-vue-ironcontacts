@@ -2,14 +2,38 @@
 import allContacts from './contacts.json'
 import { ref } from 'vue';
 
-const contacts = ref(allContacts.splice(0,5));
-const remainingContacts = ref(allContacts.splice(5,5));
+const contacts = ref([]);
+const remainingContacts = ref([]);
+remainingContacts.value = [...allContacts];
+
+for(let i=0; i<5; i++) {
+  contacts.value.push(allContacts[i]); 
+  remainingContacts.value.shift();
+}
+
+console.log(contacts.value)
+  console.log(remainingContacts.value)
 
 function addRandomContact() {
   const randomItem = Math.floor(Math.random() * remainingContacts.value.length) ;
-  console.log(remainingContacts.value.length, randomItem)
+  console.log(contacts.value.length, remainingContacts.value.length, randomItem)
   contacts.value.push(remainingContacts.value[randomItem]);
-  remainingContacts.value.splice(randomItem,1)
+  remainingContacts.value = remainingContacts.value.filter((_, i) => i !== randomItem);
+  console.log(contacts.value)
+  console.log(remainingContacts.value)
+}
+
+function addRandomContact2() {
+  //const randomItem = Math.floor(Math.random() * remainingContacts.value.length) ;
+ 
+  //contacts.value.splice(3,2)
+  contacts.value.push(remainingContacts.value[3]);
+  remainingContacts.value = remainingContacts.value.filter((_, i) => i !== 3)
+  console.log(contacts.value)
+  console.log(remainingContacts.value)
+  //console.log(newArr.value)
+  //contacts.value.push(remainingContacts.value[randomItem]);
+  //remainingContacts.value.splice(randomItem,1)
 }
 
 function sortContacts(attr) {
