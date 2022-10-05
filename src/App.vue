@@ -11,30 +11,13 @@ for(let i=0; i<5; i++) {
   remainingContacts.value.shift();
 }
 
-console.log(contacts.value)
-  console.log(remainingContacts.value)
 
 function addRandomContact() {
   const randomItem = Math.floor(Math.random() * remainingContacts.value.length) ;
-  console.log(contacts.value.length, remainingContacts.value.length, randomItem)
   contacts.value.push(remainingContacts.value[randomItem]);
   remainingContacts.value = remainingContacts.value.filter((_, i) => i !== randomItem);
-  console.log(contacts.value)
-  console.log(remainingContacts.value)
 }
 
-function addRandomContact2() {
-  //const randomItem = Math.floor(Math.random() * remainingContacts.value.length) ;
- 
-  //contacts.value.splice(3,2)
-  contacts.value.push(remainingContacts.value[3]);
-  remainingContacts.value = remainingContacts.value.filter((_, i) => i !== 3)
-  console.log(contacts.value)
-  console.log(remainingContacts.value)
-  //console.log(newArr.value)
-  //contacts.value.push(remainingContacts.value[randomItem]);
-  //remainingContacts.value.splice(randomItem,1)
-}
 
 function sortContacts(attr) {
   if(attr === 'Popularity') {
@@ -46,6 +29,10 @@ function sortContacts(attr) {
           return a == b ? 0 : a > b ? 1 : -1; 
     })
   }
+}
+
+function removeContact(elem) {
+  contacts.value = contacts.value.filter((_, i) => i !== elem);
 }
 
 </script>
@@ -69,7 +56,7 @@ function sortContacts(attr) {
       <th>Won an Emmy</th>
       <th>Actions</th>
     </tr>
-    <tr v-for="contact in contacts" :key="contacts.name">
+    <tr v-for="(contact, index) in contacts" :key="contacts.name">
       <td>
         <img alt="Celebrity picture" :src=contact.pictureUrl>
       </td>
@@ -82,7 +69,7 @@ function sortContacts(attr) {
         <img class="trophy" alt="trophy image" src="./assets/images/emmy.png">
       </td>
       <td>
-        <button @click="removeContact">Delete</button>
+        <button @click="removeContact(index)">Delete</button>
       </td>
     </tr>
   </table>
