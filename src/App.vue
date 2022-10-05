@@ -40,12 +40,14 @@ function deleteContact(id) {
 </script>
 
 <template>
-  <h1>IronContacts</h1>
-  <container class="buttons">
-    <button @click="addContact" type="button">Add Random Contact</button>
-    <button @click="sortContacts" type="button">Sort by name</button>
-    <button @click="sortPopularity" type="button">Sort by popularity</button>
-  </container>
+  <nav>
+    <h1>IronContacts</h1>
+    <container class="buttons">
+      <button @click="addContact" type="button">Add Random Contact</button>
+      <button @click="sortContacts" type="button">Sort by name</button>
+      <button @click="sortPopularity" type="button">Sort by popularity</button>
+    </container>
+  </nav>
   <table>
     <thead>
       <tr>
@@ -99,6 +101,14 @@ body {
   width: -webkit-fill-available;
   margin: 0;
   padding-bottom: 75px;
+}
+
+nav {
+  position: sticky;
+  top: 0px;
+  background-image: url("./../public/background.jpg");
+  z-index: 1;
+  padding-bottom: 10px;
 }
 
 .buttons {
