@@ -40,55 +40,46 @@ const deleteContact = (el) => {
 </script>
 
 <template>
-  <div class="container">
-    <h1>Iron Contacts</h1>
-    <div class="d-flex justify-content-around">
-      <button
-        type="button"
-        class="btn btn-primary btn-sm"
-        @click="addRandomContact"
-      >
-        Add Random Contact
-      </button>
-      <button type="button" class="btn btn-primary btn-sm" @click="sortByName">
-        Sort by name
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary btn-sm"
-        @click="sortByPopularity"
-      >
-        Sort by popularuty
-      </button>
-    </div>
-    <table class="table">
+  <div class="container shadow-sm p-3 mb-5 bg-body rounded">
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand"><h2> Iron Contacts</h2></span>
+      </div>
+      <form class="container-fluid justify-content-start">
+        <button class="btn btn-outline-success me-2" type="button" @click="addRandomContact">Add Random Contact</button>
+        <button class="btn btn-outline-success me-2" type="button" @click="sortByName">Sort by name</button>
+        <button class="btn btn-outline-success me-2" type="button" @click="sortByPopularity">Sort by popularuty</button>
+      </form>
+    </nav>
+    <table class="table table-striped">
       <tr>
-        <th>Picture</th>
-        <th>Name</th>
-        <th>Popularity</th>
-        <th>Won an Oscar</th>
-        <th>Won an Emmy</th>
+        <th class="col-sm-2 text-center">Picture</th>
+        <th class="col-sm-3 text-center">Name</th>
+        <th class="col-sm-2 text-center">Popularity</th>
+        <th class="col-sm-2 text-center">Won an Oscar</th>
+        <th class="col-sm-2 text-center">Won an Emmy</th>
       </tr>
-      <tr v-for="contact in contactsList" :key="contact.id">
-        <td>
-          <img style="width: 100px" :src="contact.pictureUrl" alt="foto" />
+      <tr class="position-relative" v-for="contact in contactsList" :key="contact.id">
+        <td class="text-center">
+          <img class="img-thumbnail" style="width: 120px" :src="contact.pictureUrl" alt="foto" />
         </td>
-        <td>{{ contact.name }}</td>
-        <td>{{ contact.popularity.toFixed(2) }}</td>
-        <td v-if="contact.wonOscar">🏆</td>
+        <td class="text-center">{{ contact.name }}</td>
+        <td class="text-center">{{ contact.popularity.toFixed(2) }}</td>
+        <td v-if="contact.wonOscar" class="text-center">🏆</td>
         <td v-else></td>
-        <td v-if="contact.wonEmmy">🏆</td>
+        <td v-if="contact.wonEmmy" class="text-center">🏆</td>
         <td v-else></td>
         <button
-          type="button"
-          class="btn btn-danger btn-sm"
-          @click="deleteContact(contact.id)"
+        type="button"
+        class="btn btn-danger btn-sm position-absolute top-50 end-0 translate-middle-y"
+        @click="deleteContact(contact.id)"
         >
-          Delete
-        </button>
-      </tr>
-    </table>
-  </div>
+        Delete
+      </button>
+    </tr>
+  </table>
+</div>
+  
 </template>
 
 <style>
