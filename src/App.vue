@@ -28,10 +28,10 @@ function sortByPopularity() {
 
 function deleteContact(id) {
   
-  firstContacts.value.forEach((contact, index) => { 
-    if (contact.id === id) {
-    firstContacts.value.splice(index, 1)
-    return firstContacts
+  firstContacts.value.forEach((key, index) => { 
+    if (key.id === id) {
+    firstContacts.value.splice(index, 1)[0]
+    console.log(firstContacts.value.id) //firstContacts//
     }
   })
   
@@ -41,14 +41,15 @@ function deleteContact(id) {
 </script>
 
 <template> 
-  <div id="app">
+  <div id="app" class>
     <div id="header">
-      <p class="fs-2">Iron Contacts</p>
-      <button type="button" class="m-2 btn btn-outline-secondary btn-sm" @click="sortByName">Sort by name</button> 
-      <button type="button" class="m-2 btn btn-outline-secondary btn-sm" @click="sortByPopularity">Sort by popularity</button> 
-      <button type="button" class="m-2 btn btn-outline-secondary btn-sm" @click="addRandomContact">Add Random Contact</button>  
+      <p class="fs-2 my-0">Iron Contacts</p>
+      <button type="button" class="mx-4 my-3 btn btn-secondary" @click="sortByName">Sort by name</button> 
+      <button type="button" class="mx-4 my-3 btn btn-secondary" @click="sortByPopularity">Sort by popularity</button> 
+      <button type="button" class="mx-4 my-3 btn btn-secondary" @click="addRandomContact">Add Random Contact</button>  
     </div>
-    <table class="table">
+    <div>
+      <table class="table">
       <tr>
         <th>Picture</th>
         <th>Name</th>
@@ -57,15 +58,19 @@ function deleteContact(id) {
         <th>Won an Emmy</th>
         <th>Actions</th>
       </tr>
-      <tr v-for="contacts in firstContacts">
-        <td><img :src="contacts.pictureUrl" alt=""></td>
-        <td>{{ contacts.name }}</td>
-        <td>{{ contacts.popularity.toFixed(2) }}</td>
-        <td v-if="contacts.wonOscar">🏆</td>
-        <td v-if="contacts.wonEmmy">🏆</td>
-        <td><button type="button" class="btn btn-outline-secondary btn-sm" @click="deleteContact(contact.id)">Delete</button></td>
+      <tr v-for="contact in firstContacts">
+        <td><img :src="contact.pictureUrl" alt=""></td>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.popularity.toFixed(2) }}</td>
+        <td v-if="contact.wonOscar">🏆</td>
+        <td v-else="contact.wonOscar"></td>
+        <td v-if="contact.wonEmmy">🏆</td>
+        <td v-else="contact.wonEmmy"></td>
+        <td><button type="button" class="btn btn-outline-danger" @click="deleteContact(contact.id)">Delete</button></td>
       </tr>
     </table>
+    </div>
+    
   </div>
 
 </template>
@@ -80,6 +85,14 @@ img {
 
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  
+}
+#table {
+ 
+  margin: auto;
+  
+  
+ 
 }
 </style>
