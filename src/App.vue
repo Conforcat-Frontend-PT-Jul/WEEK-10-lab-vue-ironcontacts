@@ -86,6 +86,9 @@ function deleteContact(id) {
 body {
   padding: 0px;
   margin: 0px;
+  background-image: url("./../public/background.jpg");
+  background-image: repeat;
+  /* background-size: cover; */
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -94,9 +97,6 @@ body {
   text-align: center;
   color: antiquewhite;
   margin-top: 60px;
-  background-image: url("./../public/background.jpg");
-
-  background-size: cover;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
   margin: 0;
