@@ -2,7 +2,19 @@
 import contacts from "./contacts.json";
 import { ref } from "vue";
 
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+shuffle(contacts);
 const showingContacts = ref(contacts.slice(0, 5));
+
+//   const showingContacts = [...Array(5)].map(() => {
+//   return ref(contacts[Math.floor(Math.random() * contacts.length)]);
+// });
 
 function addContact() {
   const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
@@ -14,7 +26,6 @@ function addContact() {
 }
 
 function sortContacts() {
-  // showingContacts.value.sort((a, b) => a.name.localeCompare(b.name));
   showingContacts.value.sort((a, b) => {
     if (a.name < b.name) {
       return -1;
@@ -88,7 +99,6 @@ body {
   margin: 0px;
   background-image: url("./../public/background.jpg");
   background-image: repeat;
-  /* background-size: cover; */
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
