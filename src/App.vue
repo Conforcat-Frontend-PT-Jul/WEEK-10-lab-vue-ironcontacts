@@ -1,21 +1,212 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import contacts from "./contacts.json";
+import { ref } from "vue";
+
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+shuffle(contacts);
+const showingContacts = ref(contacts.slice(0, 5));
+
+//   const showingContacts = [...Array(5)].map(() => {
+//   return ref(contacts[Math.floor(Math.random() * contacts.length)]);
+// });
+
+function addContact() {
+  const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+  if (!showingContacts.value.includes(randomContact)) {
+    return showingContacts.value.unshift(randomContact);
+  } else {
+    return addContact();
+  }
+}
+
+function sortContacts() {
+  showingContacts.value.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    } else if (a.name > b.name) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+function sortPopularity() {
+  showingContacts.value.sort((a, b) => b.popularity - a.popularity);
+}
+
+function deleteContact(id) {
+  showingContacts.value.forEach((el, index) => {
+    if (el.id === id) {
+      showingContacts.value.splice(index, 1);
+    }
+  });
+}
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <nav>
+    <h1>IronContacts</h1>
+    <container class="buttons">
+      <button @click="addContact" type="button">Add Random Contact</button>
+      <button @click="sortContacts" type="button">Sort by name</button>
+      <button @click="sortPopularity" type="button">Sort by popularity</button>
+    </container>
+  </nav>
+  <table>
+    <thead>
+      <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Popularity</th>
+        <th>Won Oscar</th>
+        <th>Won Emmy</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="contact in showingContacts" :key="contact.id">
+        <TransitionGroup name="list">
+          <td>
+            <img :src="contact.pictureUrl" alt="{{contact.id}}" class="star" />
+          </td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.popularity.toFixed(2) }}</td>
+          <td v-if="contact.wonOscar" class="trophy">🏆</td>
+          <td v-else></td>
+          <td v-if="contact.wonEmmy" class="trophy">🌟</td>
+          <td v-else></td>
+          <td>
+            <button @click="deleteContact(contact.id)" type="button">
+              Delete
+            </button>
+          </td>
+        </TransitionGroup>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style>
+body {
+  padding: 0px;
+  margin: 0px;
+  background-image: url("./../public/background.jpg");
+  background-image: repeat;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: antiquewhite;
   margin-top: 60px;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  margin: 0;
+  padding-bottom: 75px;
+}
+
+nav {
+  position: sticky;
+  top: 0px;
+  background-image: url("./../public/background.jpg");
+  z-index: 1;
+  padding-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 75px;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.4s;
+}
+
+img:hover {
+  transform: scale(3.5);
+  translate: 55vw;
+  position: relative;
+  rotate: 360deg;
+  z-index: 999;
+}
+
+table {
+  margin: 20px;
+
+  width: -webkit-fill-available;
+}
+
+thead {
+  font-weight: 800;
+  font-size: x-large;
+}
+
+.trophy {
+  font-size: 30px;
+}
+
+td {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: gold;
+  background-image: linear-gradient(gold, lightgoldenrodyellow);
+  text-decoration: none;
+  color: #2c3e50;
+  border-style: none;
+  border-radius: 10px;
+  margin: 3px;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+button:hover {
+  background-color: lightgoldenrodyellow;
+  background-image: linear-gradient(lightgoldenrodyellow, gold);
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0 3px rgb(102, 102, 102);
+  transform: translateY(2px);
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+h1 {
+  margin-top: 0;
+  padding: 35px;
 }
 </style>
