@@ -2,6 +2,8 @@
   <div class="app">
     <h1>IRON CONTACTS</h1>
     <button @click="addContact" type="button">Add Random Contact</button>
+    <button @click="sortName" type="button">Sort by name</button>
+    <button @click="sortPopularity" type="button">Sort by popularity</button>
     <table>
       <tr>
         <th>Picture</th>
@@ -35,7 +37,16 @@ const addContact = function(){
   contacts.value.push(newContact);
 };
 
-console.log(contacts)
+const sortName = function () {  
+  contacts.value.sort((a,b) =>  a.name.localeCompare(b.name));
+}
+
+const sortPopularity = function () {
+  contacts.value.sort((a,b) => {
+    return a.popularity - b.popularity;
+  })
+}
+
 
 
 </script>
