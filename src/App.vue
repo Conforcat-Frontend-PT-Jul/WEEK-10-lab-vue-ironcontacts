@@ -20,6 +20,13 @@ function sortByPopularity() {
   movieContacts.value.sort((a, b) => b.popularity - a.popularity);
   return movieContacts;
 }
+function deleteContact(id) {
+  movieContacts.value.forEach((el, index) => {
+    if (el.id === id) {
+      movieContacts.value.splice(index, 1);
+    }
+  });
+}
 </script>
 
 <template>
@@ -28,6 +35,7 @@ function sortByPopularity() {
   <button @click="addRandomContact()">Add Random Contact</button>
   <button @click="sortByName()">Sort by Name</button>
   <button @click="sortByPopularity()">Sort by Popularity</button>
+
   <table>
     <thead>
       <tr>
@@ -36,6 +44,7 @@ function sortByPopularity() {
         <th>Popularity</th>
         <th>Won Oscar</th>
         <th>Won Emmy</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -49,6 +58,11 @@ function sortByPopularity() {
         <td v-else></td>
         <td v-if="movieContact.wonEmmy">🏵</td>
         <td v-else></td>
+        <td>
+          <button @click="deleteContact(movieContact.id)">
+            Delete Contact
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -75,5 +89,14 @@ h1 {
 }
 thead {
   font-size: 25px;
+  margin-bottom: 25px;
+}
+button {
+  margin: 50px;
+  width: 160px;
+  height: 40px;
+  color: whitesmoke;
+  background-color: darkblue;
+  font-weight: 800;
 }
 </style>
