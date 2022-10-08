@@ -3,11 +3,21 @@ import contacts from "./contacts.json";
 import { ref } from "vue";
 
 const movieContacts = ref(contacts.slice(0, 5));
+
+function addRandomContact() {
+  const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+  if (movieContacts.value.includes(randomContact)) {
+    return;
+  } else {
+    return movieContacts.value.unshift(randomContact);
+  }
+}
 </script>
 
 <template>
   <div class="app"></div>
   <h1>IronContacts</h1>
+  <button @click="addRandomContact()">Add Random Contact</button>
   <table>
     <thead>
       <tr>
@@ -26,7 +36,9 @@ const movieContacts = ref(contacts.slice(0, 5));
         <td>{{ movieContact.name }}</td>
         <td>{{ movieContact.popularity }}</td>
         <td v-if="movieContact.wonOscar">🏆</td>
+        <td v-else></td>
         <td v-if="movieContact.wonEmmy">🏵</td>
+        <td v-else></td>
       </tr>
     </tbody>
   </table>
