@@ -11,6 +11,7 @@
         <th>Popularity</th>
         <th>Won Oscar</th>
         <th>Won Emmy</th>
+        <th>Actions</th>
       </tr>
       <tr  v-for="(contact, index) in contacts" :key="index">
         <td><img :src="contact.pictureUrl" alt="contact picture"  style="width: 150px"/></td>
@@ -18,6 +19,7 @@
         <td>{{contact.popularity}}</td>
         <td v-if="contact.wonOscar"><img :src="trophy" style="width: 50px"/></td>
         <td v-if="contact.wonEmmy"><img :src="trophy" style="width: 50px"/></td>
+        <td><button @click="deleteContact(contact.id)" type="button">Delete</button></td>
       </tr>
     </table>
   </div>
@@ -47,6 +49,14 @@ const sortPopularity = function () {
   })
 }
 
+const deleteContact = function (id) {
+  contacts.value.forEach((contact, index) => {
+    if(contact.id === id){
+      contacts.value.splice(index, 1)
+      data.push(contact);
+    }
+  })
+}
 
 
 </script>
