@@ -105,7 +105,7 @@ table {
 }
 
 .btn-sort {
-  margin-left: 15px;
+  margin-left: 20px;
   border: none;
   background-color: brown;
   color: aliceblue;
@@ -116,6 +116,7 @@ table {
 
 .btn-sort:hover {
   background-color: rgb(204, 81, 81);
+  transform: scale(1.2);
 }
 
 .deletetor {
@@ -129,6 +130,7 @@ table {
 
 .deletetor:hover {
   background-color: rgb(189, 131, 244);
+  transform: scale(1.2);
 }
 
 #web-mode {
