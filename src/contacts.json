@@ -1,5 +1,14 @@
 [
   {
+    "name": "Angelina Jolie",
+    "pictureUrl": "https://image.tmdb.org/t/p/w500/nsxtg9MQG01hvud1vVEW9vvfukK.jpg",
+    "popularity": 7.875641,
+    "id": "2e7ad5d9-139b-4ae1-b9dd-f9ab9c4b0c2c",
+    "wonOscar": true,
+    "wonEmmy": false
+  },
+
+  {
     "name": "Idris Elba",
     "pictureUrl": "https://image.tmdb.org/t/p/w500/d9NkfCwczP0TjgrjpF94jF67SK8.jpg",
     "popularity": 11.622713,
@@ -256,14 +265,7 @@
     "wonOscar": false,
     "wonEmmy": true
   },
-  {
-    "name": "Angelina Jolie",
-    "pictureUrl": "https://image.tmdb.org/t/p/w500/nsxtg9MQG01hvud1vVEW9vvfukK.jpg",
-    "popularity": 7.875641,
-    "id": "2e7ad5d9-139b-4ae1-b9dd-f9ab9c4b0c2c",
-    "wonOscar": true,
-    "wonEmmy": false
-  },
+
   {
     "name": "Kaya Scodelario",
     "pictureUrl": "https://image.tmdb.org/t/p/w500/iTrPnn7oS96k0iWPzNxaKCNutB6.jpg",
