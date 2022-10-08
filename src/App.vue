@@ -14,6 +14,8 @@ const movieContacts = ref(contacts.slice(0, 5));
         <th>Picture</th>
         <th>Name</th>
         <th>Popularity</th>
+        <th>Won Oscar</th>
+        <th>Won Emmy</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +25,8 @@ const movieContacts = ref(contacts.slice(0, 5));
         </td>
         <td>{{ movieContact.name }}</td>
         <td>{{ movieContact.popularity }}</td>
+        <td v-if="movieContact.wonOscar">🏆</td>
+        <td v-if="movieContact.wonEmmy">🏵</td>
       </tr>
     </tbody>
   </table>
