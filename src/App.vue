@@ -12,12 +12,22 @@ function addRandomContact() {
     return movieContacts.value.unshift(randomContact);
   }
 }
+function sortByName() {
+  movieContacts.value.sort((a, b) => a.name.localeCompare(b.name));
+  return movieContacts;
+}
+function sortByPopularity() {
+  movieContacts.value.sort((a, b) => b.popularity - a.popularity);
+  return movieContacts;
+}
 </script>
 
 <template>
   <div class="app"></div>
   <h1>IronContacts</h1>
   <button @click="addRandomContact()">Add Random Contact</button>
+  <button @click="sortByName()">Sort by Name</button>
+  <button @click="sortByPopularity()">Sort by Popularity</button>
   <table>
     <thead>
       <tr>
